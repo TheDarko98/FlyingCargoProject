@@ -15,11 +15,11 @@ namespace FlyingCargoProject.Gui
             };
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetProductsAsync()
+        public async Task<IEnumerable<ProductDTO>> GetProductsAsync(string search = null)
         {
-            var response = await _httpClient.GetAsync("products");
+            string query = string.IsNullOrWhiteSpace(search) ? string.Empty : $"?search={search}";
+            var response = await _httpClient.GetAsync($"products{query}");
 
-         
             response.EnsureSuccessStatusCode();
 
             var products = await response.Content.ReadFromJsonAsync<IEnumerable<ProductDTO>>();

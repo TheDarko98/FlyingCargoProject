@@ -81,7 +81,7 @@ namespace FlyingCargoProject.Gui
                 {
                     var updatedProduct = new ProductDTO
                     {
-                        ProductId = updateForm.ProductId.Value,  
+                        ProductId = updateForm.ProductId.Value,
                         ProductName = updateForm.ProductName,
                         Price = updateForm.Price,
                         Description = updateForm.Description,
@@ -126,6 +126,24 @@ namespace FlyingCargoProject.Gui
                 {
                     MessageBox.Show($"Error deleting product: {ex.Message}");
                 }
+            }
+        }
+
+        private async void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var searchTerm = txtSearch.Text.Trim(); 
+                var productService = new ProductService();
+
+                var products = await productService.GetProductsAsync(searchTerm);  
+
+                dataGridView1.DataSource = products.ToList();
+                CustomizeDataGridView(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading products: {ex.Message}");
             }
         }
         #region Helpers

@@ -50,7 +50,6 @@
             // 
             txtPrice.Location = new Point(51, 120);
             txtPrice.Name = "txtPrice";
-            txtPrice.PlaceholderText = "Price";
             txtPrice.Size = new Size(151, 23);
             txtPrice.TabIndex = 1;
             // 
@@ -58,7 +57,6 @@
             // 
             txtStockQuantity.Location = new Point(51, 172);
             txtStockQuantity.Name = "txtStockQuantity";
-            txtStockQuantity.PlaceholderText = "Stock Quantity";
             txtStockQuantity.Size = new Size(151, 23);
             txtStockQuantity.TabIndex = 3;
             // 
@@ -133,7 +131,6 @@
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "AddProductForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "AddProductForm";
             ResumeLayout(false);
             PerformLayout();
         }

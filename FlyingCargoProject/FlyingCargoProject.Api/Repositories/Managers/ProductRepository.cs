@@ -1,6 +1,7 @@
 ﻿using FlyingCargoProject.Api.Repositories.Interfaces;
 using FlyingCargoProject.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace FlyingCargoProject.Api.Repositories.Managers
 {
@@ -13,8 +14,13 @@ namespace FlyingCargoProject.Api.Repositories.Managers
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<IEnumerable<Product>> GetProductsAsync()
+        public async Task<IEnumerable<Product>> GetProductsAsync(Expression<Func<Product, bool>> filter = null)
         {
+            if (filter != null)
+            {
+                return await _context.Products.Where(filter).ToListAsync();
+            }
+
             return await _context.Products.ToListAsync();
         }
 
@@ -25,14 +31,12 @@ namespace FlyingCargoProject.Api.Repositories.Managers
 
         public async Task AddProductAsync(Product product)
         {
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync();
+            _context.Products.Add(product); 
         }
 
         public async Task UpdateProductAsync(Product product)
         {
-            _context.Products.Update(product);
-            await _context.SaveChangesAsync();
+            _context.Products.Update(product); 
         }
 
         public async Task DeleteProductAsync(int productId)
@@ -40,8 +44,7 @@ namespace FlyingCargoProject.Api.Repositories.Managers
             var product = await _context.Products.FindAsync(productId);
             if (product != null)
             {
-                _context.Products.Remove(product);
-                await _context.SaveChangesAsync();
+                _context.Products.Remove(product); 
             }
         }
     }

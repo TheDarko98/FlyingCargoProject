@@ -33,13 +33,15 @@
             btnAddProducts = new Button();
             btnUpdateProducts = new Button();
             btnDeleteProducts = new Button();
+            txtSearch = new TextBox();
+            btnSearch = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 72);
+            dataGridView1.Location = new Point(6, 143);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(672, 192);
             dataGridView1.TabIndex = 0;
@@ -84,11 +86,35 @@
             btnDeleteProducts.UseVisualStyleBackColor = true;
             btnDeleteProducts.Click += btnDeleteProducts_Click;
             // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(6, 105);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(165, 23);
+            txtSearch.TabIndex = 7;
+            txtSearch.Text = placeholderText;
+            txtSearch.ForeColor = Color.Gray;  
+            txtSearch.Enter += TxtSearch_Enter;  
+            txtSearch.Leave += TxtSearch_Leave; 
+            this.Controls.Add(txtSearch);
+            // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(177, 105);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(75, 23);
+            btnSearch.TabIndex = 6;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(697, 450);
+            Controls.Add(btnSearch);
+            Controls.Add(txtSearch);
             Controls.Add(btnDeleteProducts);
             Controls.Add(btnUpdateProducts);
             Controls.Add(btnAddProducts);
@@ -100,6 +126,7 @@
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -109,5 +136,29 @@
         private Button btnAddProducts;
         private Button btnUpdateProducts;
         private Button btnDeleteProducts;
+        private TextBox txtSearch;
+        private Button btnSearch;
+        private string placeholderText = "Search products...";
+
+
+        #region Event handlers
+        private void TxtSearch_Enter(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == placeholderText)
+            {
+                txtSearch.Text = "";
+                txtSearch.ForeColor = Color.Black;  
+            }
+        }
+
+        private void TxtSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                txtSearch.Text = placeholderText;    
+                txtSearch.ForeColor = Color.Gray;
+            }
+        }
+        #endregion
     }
 }

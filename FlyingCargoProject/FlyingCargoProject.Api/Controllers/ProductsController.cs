@@ -3,6 +3,7 @@ using FlyingCargoProject.Api.DTOs;
 using FlyingCargoProject.Api.Repositories;
 using FlyingCargoProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -17,11 +18,18 @@ public class ProductsController : ControllerBase
         _mapper = mapper;
     }
 
-    // Get all products
+    // Get all products with optional filtering (Unit of Work + Filtering)
     [HttpGet]
-    public async Task<IActionResult> GetAllProducts()
+    public async Task<IActionResult> GetAllProducts([FromQuery] string search = null)
     {
-        var products = await _unitOfWork.Products.GetProductsAsync();
+        // Implement filtering logic
+        Expression<Func<Product, bool>> filter = null;
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            filter = product => product.ProductName.Contains(search) || product.Description.Contains(search);
+        }
+
+        var products = await _unitOfWork.Products.GetProductsAsync(filter);
         var productDTOs = _mapper.Map<IEnumerable<ProductDTO>>(products);
         return Ok(productDTOs);
     }
@@ -45,10 +53,13 @@ public class ProductsController : ControllerBase
     {
         var product = _mapper.Map<Product>(productDTO);
         await _unitOfWork.Products.AddProductAsync(product);
+
+        await _unitOfWork.CompleteAsync();
+
         return Ok();
     }
 
-    // Update an existing product(not sure if this functionality is actually needed
+    // Update an existing product
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateProduct(int id, ProductUpdateDTO productDTO)
     {
@@ -60,6 +71,9 @@ public class ProductsController : ControllerBase
 
         _mapper.Map(productDTO, product);
         await _unitOfWork.Products.UpdateProductAsync(product);
+
+        await _unitOfWork.CompleteAsync();
+
         return Ok();
     }
 
@@ -74,6 +88,9 @@ public class ProductsController : ControllerBase
         }
 
         await _unitOfWork.Products.DeleteProductAsync(id);
+
+        await _unitOfWork.CompleteAsync();
+
         return Ok();
     }
 }

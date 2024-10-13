@@ -15,13 +15,13 @@ namespace FlyingCargoProject.Gui
             InitializeComponent();
         }
 
-        public void SetProductId(int productId)
-        {
-            ProductId = productId;
-        }
-
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            if (!ValidateForm())
+            {
+                return;  
+            }
+
             try
             {
                 ProductName = txtProductName.Text;
@@ -39,7 +39,10 @@ namespace FlyingCargoProject.Gui
         }
 
         #region Helpers 
-
+        public void SetProductId(int productId)
+        {
+            ProductId = productId;
+        }
         // This method pre-fills the form with existing product data forr updates
         public void SetProductData(ProductDTO product)
         {
@@ -49,6 +52,43 @@ namespace FlyingCargoProject.Gui
             txtStockQuantity.Text = product.StockQuantity.ToString();
 
             SetProductId(product.ProductId);
+        }
+        // Centralized validation method
+        private bool ValidateForm()
+        {
+            var controlsToValidate = new Dictionary<string, Control>
+            {
+                { "Product Name", txtProductName },
+                { "Price", txtPrice },
+                { "Description", rtbDescription },
+                { "Stock Quantity", txtStockQuantity }
+            };
+
+            foreach (var control in controlsToValidate)
+            {
+                if (string.IsNullOrWhiteSpace(control.Value.Text))
+                {
+                    MessageBox.Show($"{control.Key} is required.");
+                    control.Value.Focus();
+                    return false;
+                }
+            }
+
+            if (!decimal.TryParse(txtPrice.Text, out _))
+            {
+                MessageBox.Show("A valid Price is required.");
+                txtPrice.Focus();
+                return false;
+            }
+
+            if (!int.TryParse(txtStockQuantity.Text, out _))
+            {
+                MessageBox.Show("A valid Stock Quantity is required.");
+                txtStockQuantity.Focus();
+                return false;
+            }
+
+            return true;
         }
 
         #endregion
