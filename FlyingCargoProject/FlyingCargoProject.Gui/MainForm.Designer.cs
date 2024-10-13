@@ -41,14 +41,14 @@
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(12, 72);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(739, 192);
+            dataGridView1.Size = new Size(672, 192);
             dataGridView1.TabIndex = 0;
             // 
             // btnLoadProducts
             // 
-            btnLoadProducts.Location = new Point(12, 298);
+            btnLoadProducts.Location = new Point(6, 415);
             btnLoadProducts.Name = "btnLoadProducts";
-            btnLoadProducts.Size = new Size(114, 23);
+            btnLoadProducts.Size = new Size(165, 23);
             btnLoadProducts.TabIndex = 1;
             btnLoadProducts.Text = "Load Products";
             btnLoadProducts.UseVisualStyleBackColor = true;
@@ -56,9 +56,9 @@
             // 
             // btnAddProducts
             // 
-            btnAddProducts.Location = new Point(172, 298);
+            btnAddProducts.Location = new Point(177, 415);
             btnAddProducts.Name = "btnAddProducts";
-            btnAddProducts.Size = new Size(111, 23);
+            btnAddProducts.Size = new Size(165, 23);
             btnAddProducts.TabIndex = 2;
             btnAddProducts.Text = "Add Products";
             btnAddProducts.UseVisualStyleBackColor = true;
@@ -66,9 +66,9 @@
             // 
             // btnUpdateProducts
             // 
-            btnUpdateProducts.Location = new Point(304, 298);
+            btnUpdateProducts.Location = new Point(348, 415);
             btnUpdateProducts.Name = "btnUpdateProducts";
-            btnUpdateProducts.Size = new Size(116, 23);
+            btnUpdateProducts.Size = new Size(165, 23);
             btnUpdateProducts.TabIndex = 3;
             btnUpdateProducts.Text = "Update Products";
             btnUpdateProducts.UseVisualStyleBackColor = true;
@@ -76,9 +76,9 @@
             // 
             // btnDeleteProducts
             // 
-            btnDeleteProducts.Location = new Point(484, 298);
+            btnDeleteProducts.Location = new Point(519, 415);
             btnDeleteProducts.Name = "btnDeleteProducts";
-            btnDeleteProducts.Size = new Size(143, 23);
+            btnDeleteProducts.Size = new Size(165, 23);
             btnDeleteProducts.TabIndex = 4;
             btnDeleteProducts.Text = "Delete products";
             btnDeleteProducts.UseVisualStyleBackColor = true;
@@ -88,13 +88,15 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(697, 450);
             Controls.Add(btnDeleteProducts);
             Controls.Add(btnUpdateProducts);
             Controls.Add(btnAddProducts);
             Controls.Add(btnLoadProducts);
             Controls.Add(dataGridView1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);

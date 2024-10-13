@@ -18,6 +18,7 @@ namespace FlyingCargoProject.Gui
                 var products = await productService.GetProductsAsync();
 
                 dataGridView1.DataSource = products.ToList();
+                CustomizeDataGridView();
             }
             catch (Exception ex)
             {
@@ -142,6 +143,14 @@ namespace FlyingCargoProject.Gui
             {
                 MessageBox.Show($"Error loading products: {ex.Message}");
             }
+        }
+        private void CustomizeDataGridView()
+        {
+            dataGridView1.Columns["Description"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            dataGridView1.Columns["Description"].Width = 200;
         }
         #endregion
     }

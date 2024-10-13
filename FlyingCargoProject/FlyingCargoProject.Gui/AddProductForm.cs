@@ -26,7 +26,7 @@ namespace FlyingCargoProject.Gui
             {
                 ProductName = txtProductName.Text;
                 Price = decimal.Parse(txtPrice.Text);
-                Description = txtDescription.Text;
+                Description = rtbDescription.Text;
                 StockQuantity = int.Parse(txtStockQuantity.Text);
 
                 this.DialogResult = DialogResult.OK;
@@ -45,7 +45,7 @@ namespace FlyingCargoProject.Gui
         {
             txtProductName.Text = product.ProductName;
             txtPrice.Text = product.Price.ToString();
-            txtDescription.Text = product.Description;
+            rtbDescription.Text = product.Description;
             txtStockQuantity.Text = product.StockQuantity.ToString();
 
             SetProductId(product.ProductId);
