@@ -32,7 +32,7 @@ Before running the project, ensure you have the following installed:
 Use the following commands to clone the repository and navigate into the project folder:
 
 ```bash
-git clone https://github.com/YourUsername/FlyingCargoProject.git
+git clone https://github.com/TheDarko98/FlyingCargoProject.git
 cd FlyingCargoProject
 ```
 
